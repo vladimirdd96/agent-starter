@@ -2,6 +2,14 @@
 
 Agent-optimized project foundation. Clone into any new project — web, mobile, backend, fullstack.
 
+## Quick start
+
+```bash
+gh repo create my-new-project --template vladimirdd96/agent-starter --private --clone
+cd my-new-project
+npm install
+```
+
 ## What's included
 
 | File / Folder | Purpose |
