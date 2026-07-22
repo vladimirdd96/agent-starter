@@ -9,6 +9,7 @@ Read CLAUDE.md first — it defines the patterns, commit policy, and doc system 
 - Utility types: `src/lib/types.ts`
 - Domain docs: `docs/` — scan `read_when` hints and load relevant files before coding
 - Feature structure: `src/features/<name>/index.ts` is the public API
+- Feature internals: use `<feature>/components`, `<feature>/hooks`, and `<feature>/lib`; never import another feature's private folders
 
 ## Non-negotiables
 
@@ -17,3 +18,5 @@ Read CLAUDE.md first — it defines the patterns, commit policy, and doc system 
 - Conventional commit format: `<type>(<scope>): <subject>`
 - No magic strings — use `as const` objects
 - No `any` — ever
+- Follow SOLID and vertical-slice boundaries; run `npm run architecture:check` after structural changes
+- Finish implementation tasks end-to-end: verify, commit, and push rather than handing off an intermediate refactor

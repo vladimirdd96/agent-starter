@@ -44,6 +44,6 @@ export default tseslint.config(
 
   // Files to ignore
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts'],
+    ignores: ['dist/**', 'node_modules/**', 'scripts/**/*.mjs', '*.config.js', '*.config.ts'],
   },
 )

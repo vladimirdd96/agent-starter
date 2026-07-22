@@ -8,7 +8,7 @@ export const err = <E>(error: E): Result<never, E> => ({ ok: false, error })
 /** Unwrap or throw — use only at call sites that can't propagate a Result */
 export function unwrap<T, E>(result: Result<T, E>): T {
   if (result.ok) return result.value
-  throw result.error
+  throw result.error instanceof Error ? result.error : new Error(String(result.error))
 }
 
 /** Map the value of a successful Result */

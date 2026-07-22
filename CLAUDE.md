@@ -61,19 +61,24 @@ Parse all external data — API responses, user input, DB results, webhook paylo
 
 ### Feature folders
 
-Group by feature, not layer. Each feature folder owns its types, logic, and (if applicable) UI.
+Group by feature, not layer. Each feature owns its types, logic, UI, and adapters so an agent can work with a single slice of the tree.
 
 ```
 src/features/
   auth/
     index.ts          ← public API only (explicit named re-exports)
-    auth.types.ts
-    auth.service.ts
-    auth.schema.ts
+    components/       ← UI owned by auth
+    hooks/            ← focused React state/effect boundaries
+    lib/              ← auth-only helpers and adapters
+    contracts.ts      ← types/schemas shared through the public API
     auth.test.ts
 ```
 
-Nothing outside a feature folder imports from inside it — only from `index.ts`. This is enforced by `eslint` import rules.
+Nothing outside a feature folder imports from inside it — only from `index.ts`. Components have one cohesive rendering responsibility; hooks own focused state/effect logic; adapters stay behind the feature that owns them. Prefer narrow callbacks/contracts over cross-feature implementation imports. Run `npm run architecture:check` after structural work; it rejects private cross-feature imports and oversized feature modules.
+
+### Autonomous completion
+
+Implementation tasks are complete only after investigation, implementation, relevant checks, applicable UI verification, commit, and push. Do not stop at an intermediate extraction or test result. Ask only for a decision that materially changes behaviour or needs authority outside the repository.
 
 ### No magic strings
 

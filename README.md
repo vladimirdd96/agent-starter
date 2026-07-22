@@ -23,6 +23,7 @@ npm install
 | `src/lib/types.ts` | Utility types (Brand, ValueOf, etc.) |
 | `tsconfig.json` | Maximum-strictness TypeScript base config |
 | `eslint.config.js` | Strict ESLint with architectural rules |
+| `scripts/check-feature-architecture.mjs` | Enforces vertical-slice privacy and 500-line feature-module limit |
 | `commitlint.config.ts` | Conventional commits enforced |
 | `.husky/` | Pre-commit: lint-staged · commit-msg: commitlint |
 | `.github/workflows/ci.yml` | Generic CI (typecheck → lint → test) |
@@ -80,9 +81,13 @@ DATABASE_URL: z.string().url(),
 ```
 src/features/auth/
   index.ts       ← public API
-  auth.service.ts
-  auth.schema.ts
+  components/    ← feature UI
+  hooks/         ← focused state/effect logic
+  lib/           ← private adapters and helpers
+  contracts.ts
 ```
+
+Run `npm run architecture:check` after structural changes. The check activates once `src/features/` exists and prevents imports of another feature's private folders.
 
 **No magic strings**:
 ```ts

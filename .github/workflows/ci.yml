@@ -28,6 +28,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Feature architecture
+        run: npm run architecture:check
+
       # Uncomment when you have tests:
       # - name: Test
       #   run: npm test

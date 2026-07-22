@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "architecture:check": "node scripts/check-feature-architecture.mjs",
     "prepare": "husky",
     "docs:list": "grep -r 'read_when' docs/ --include='*.md' -l"
   },
